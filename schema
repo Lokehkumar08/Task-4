@@ -1,0 +1,172 @@
+-- Create Database
+CREATE DATABASE IF NOT EXISTS korporatekitchen;
+USE korporatekitchen;
+
+--------------------------------------------------
+-- Customers Table (user)
+--------------------------------------------------
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact VARCHAR(15),
+    address TEXT,
+    image BLOB
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Admin Table
+--------------------------------------------------
+CREATE TABLE admin (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact VARCHAR(15),
+    image BLOB
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Delivery Agent Table
+--------------------------------------------------
+CREATE TABLE delivery_agent (
+    agent_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact VARCHAR(15),
+    image BLOB
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Restaurant Table
+--------------------------------------------------
+CREATE TABLE restaurant (
+    restaurant_id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_name VARCHAR(100) NOT NULL,
+    user_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contact VARCHAR(15),
+    address TEXT,
+    image BLOB,
+    open_hours TIME,
+    close_hours TIME
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Master Menu Items Table
+--------------------------------------------------
+CREATE TABLE master_menu_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    restaurant_id INT,
+    item_name VARCHAR(100) NOT NULL,
+    item_description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    image BLOB,
+    item_type VARCHAR(50),
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Orders Table
+--------------------------------------------------
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    items TEXT,
+    quantity INT,
+    total_price DECIMAL(10,2),
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    order_status ENUM('pending', 'completed', 'cancelled') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Payment Table (combining payments and payment_gateway)
+--------------------------------------------------
+CREATE TABLE payment (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    payment_type VARCHAR(50),
+    payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Bank Table
+--------------------------------------------------
+CREATE TABLE bank (
+    bank_id INT AUTO_INCREMENT PRIMARY KEY,
+    transaction_id INT,
+    total_price DECIMAL(10,2),
+    order_date DATETIME,
+    FOREIGN KEY (transaction_id) REFERENCES payment(transaction_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Delivery Table
+--------------------------------------------------
+CREATE TABLE delivery (
+    delivery_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    delivery_status ENUM('pending', 'delivered', 'failed') DEFAULT 'pending',
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Remarks Table
+--------------------------------------------------
+CREATE TABLE remarks (
+    remark_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    user_remark TEXT,
+    remark_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- User Favorites Table
+--------------------------------------------------
+CREATE TABLE user_favorites (
+    favorite_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    item_name VARCHAR(100) NOT NULL,
+    restaurant_name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Cart Table
+--------------------------------------------------
+CREATE TABLE cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    item_name VARCHAR(100) NOT NULL,
+    item_price DECIMAL(10,2) NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Order History Table
+--------------------------------------------------
+CREATE TABLE order_history (
+    history_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    user_id INT,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
+
+--------------------------------------------------
+-- Notifications Table
+--------------------------------------------------
+CREATE TABLE notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    message TEXT,
+    time_stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+) ENGINE=InnoDB;
