@@ -98,7 +98,7 @@
       </div>
       
       <br/>
-      <button class="btn" onclick="location.href='${pageContext.request.contextPath}/user/cart'">Back to Cart</button>
+      <button class="btn" onclick="location.href='${pageContext.request.contextPath}/user/cart'">Cancel Payment</button>
     </div>
     
     <!-- UPI Modal -->
