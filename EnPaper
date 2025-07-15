@@ -1,0 +1,108 @@
+Here’s a detailed summary based on your research paper:
+
+
+---
+
+Name:
+
+Enhancing Cancer Diagnosis with Advanced Vision Transformers and Hybrid Deep Learning Models
+
+
+---
+
+Publication Name:
+
+International Journal of Scientific Research in Engineering and Management (IJSREM)
+Volume: 09
+Issue: 04
+ISSN: 2582-3930
+DOI: 10.55041/IJSREM45521
+SJIF Rating: 8.586
+
+
+---
+
+Date:
+
+April 2025
+
+
+---
+
+Mentor / Guide:
+
+Sabitha P
+Assistant Professor,
+Department of Computer Science and Engineering,
+SRM Institute of Science and Technology, Ramapuram, Chennai.
+Email: sabithap@srmist.edu.in
+
+
+---
+
+No. of Authors:
+
+4 Authors
+
+1. Sabitha P (Mentor)
+
+
+2. Varun K
+
+
+3. Lokesh Kumar K
+
+
+4. Jagadeesh P
+
+
+
+
+---
+
+Type:
+
+Research Paper (AI in Medical Imaging / Computer Vision)
+
+
+---
+
+Key Skills / Technologies Used:
+
+Vision Transformers (ViT)
+
+Convolutional Neural Networks (CNN)
+
+Hybrid Deep Learning Models
+
+Transfer Learning
+
+Skin Cancer Diagnosis
+
+Medical Image Processing
+
+Explainable AI (XAI) — Grad-CAM, Grad-CAM++, Score-CAM
+
+Swin Transformer
+
+ResNet50, VGG19, DenseNet201, MobileNetV2
+
+SMOTE for class imbalance
+
+Google Colab (Pro+ with GPU)
+
+Python, TensorFlow / PyTorch (implied)
+
+
+
+---
+
+Description:
+
+This research presents a novel hybrid deep learning framework combining CNNs and Vision Transformers (ViTs) for early and accurate cancer diagnosis, specifically focusing on skin cancer detection. The study addresses limitations in individual CNN or ViT architectures by merging local spatial feature extraction (CNN) with global attention modeling (ViT). The system utilizes pre-trained models like ResNet50 and ViT-base/Large, enhanced by SMOTE to handle class imbalance and XAI techniques like Grad-CAM and Score-CAM for interpretability. The models were trained and tested on the ISIC skin cancer dataset, showing improved performance in terms of accuracy, precision, recall, and F1-score, making it viable for real-world medical applications. Future scope includes integrating radiomics/genomics and real-time deployment using federated learning for privacy-preserving diagnostics.
+
+
+---
+
+Let me know if you want this formatted as a resume entry, PPT slide, or project abstract as well!
+
